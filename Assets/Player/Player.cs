@@ -18,17 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] CharacterController _Controller;
     //アニメ―ションのスクリプト
     [SerializeField] AnimScript _AnimScript;
-
-    //今一人称状態か
-    private bool _IsFP;
-
-    //TP状態のカメラ
-    [SerializeField] CinemachineVirtualCamera _TPCamera;
-    //FP状態のカメラ
-    [SerializeField] CinemachineVirtualCamera _WalkFPCamera;
-    [SerializeField] CinemachineVirtualCamera _DashFPCamera;
-    [SerializeField] CinemachineVirtualCamera _ProneFPCamera;
-
+    //カメラのマネージャー
+    [SerializeField] PlayerCameraManager _CameraManager;
     //当たり判定の関数
     protected void OnCollisionStay(Collision collision)
     {       
@@ -42,26 +33,6 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody>().drag = 0;
     }
 
-    ////////////////////////////////////////////////////////
-    ///概要   ： 一人称視点と三人称支店のカメラを切り替える関数
-    ///引数   ： なし
-    ///返り値 ： なし
-    ////////////////////////////////////////////////////////
-    private void SwitchViewPointCamera()
-    {
-        _IsFP = !_IsFP;//フラグを反対に
-
-        if (_IsFP)//一人称視点の時
-        {
-            _TPCamera.gameObject.SetActive(false);
-            _WalkFPCamera.gameObject.SetActive(true);
-        }
-        else//三人称視点の時
-        {
-            _TPCamera.gameObject.SetActive(true);
-            _WalkFPCamera.gameObject.SetActive(false);
-        }
-    }
     ////////////////////////////////////////////////////////
     ///概要   ： プレイヤーの共通の移動
     ///引数   ： なし
@@ -126,21 +97,18 @@ public class Player : MonoBehaviour
     //////////////////////////////////////////////////////// 
     private void Update()
 	{
-        if (Input.GetButtonDown("FirstPerson"))//視点の切り替え        
-            SwitchViewPointCamera();//カメラを切り替える
-
         if (_Controller.isGrounded)//床の上にいるなら
         {
             _Gravity = 1000;//重力を設定する
             _MoveDirection = Vector3.zero;//移動量を０にする
 
-            //一人称視点なら
-            if (_IsFP)
-                FirstPersonPlayerMove();
-            //三人称視点なら
-            else
-                ThirdPersonPlayerMove();
-        }
+			//一人称視点なら
+			if (_CameraManager.GetIsFirstPerson())
+				FirstPersonPlayerMove();
+			//三人称視点なら
+			else
+				ThirdPersonPlayerMove();
+		}
         else//プレイヤーが空中にいるとき
             _Gravity = 250;//重力を設定する
 		

@@ -29,7 +29,6 @@ public class AnimScript : MonoBehaviour
 		return animator.GetBool(key_isProne);
 	}
 
-
 	//移動キーを押しているかどうか
 	private bool IsMove()
 	{
@@ -45,7 +44,8 @@ public class AnimScript : MonoBehaviour
     void Update()
     {
 		//匍匐前進しているかどうか
-		if(Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("ChangeHohuku"))
+		if(Input.GetKeyDown(KeyCode.Space) && !animator.GetBool(key_isRun) ||
+		   Input.GetButtonDown("ChangeHohuku") && !animator.GetBool(key_isRun))
 		{
 			if(animator.GetBool(key_isProne))
 			animator.SetBool(key_isProne, false);

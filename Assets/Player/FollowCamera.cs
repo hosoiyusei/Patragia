@@ -22,5 +22,13 @@ public class FollowCamera : MonoBehaviour
     {
         // カメラの位置をターゲットの位置にオフセットを足した場所にする。
         gameObject.transform.position = target.transform.position + offset;
-    }
+        //カメラに写すオブジェクトの方向を向かせる
+        transform.LookAt(new Vector3
+        (target.transform.localPosition.x, 
+         target.transform.localPosition.y, 
+         target.transform.localPosition.z + 14));
+
+
+    //手前はZが少なくなる
+        }
 }

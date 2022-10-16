@@ -84,10 +84,7 @@ MonoBehaviour:
   _Gravity: 20
   _Controller: {fileID: 0}
   _AnimScript: {fileID: 0}
-  _TPCamera: {fileID: 0}
-  _WalkFPCamera: {fileID: 0}
-  _DashFPCamera: {fileID: 0}
-  _ProneFPCamera: {fileID: 0}
+  _CameraManager: {fileID: 0}
 --- !u!114 &5405830782216147422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,11 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e99704cede183648bb03cdc1a69a278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TPCamera: {fileID: 0}
-  _WalkFPCamera: {fileID: 0}
-  _DashFPCamera: {fileID: 0}
-  _ProneFPCamera: {fileID: 0}
-  _AnimScript: {fileID: 0}
+  _AnimScript: {fileID: 772894661868327986}
 --- !u!1 &1254465153152045110
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +204,7 @@ GameObject:
   - component: {fileID: 8967232692670674239}
   - component: {fileID: 7461404024095527600}
   m_Layer: 0
-  m_Name: WalkFPCamera
+  m_Name: WalkFirstPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061372063414348205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.60999966, y: 3.1, z: 2.76}
+  m_LocalPosition: {x: 0.60999966, y: 3.21, z: 3.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -282,7 +275,7 @@ GameObject:
   - component: {fileID: 6429574458028101276}
   - component: {fileID: 793575005313829681}
   m_Layer: 0
-  m_Name: ProneFPCamera
+  m_Name: ProneFirstPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +536,7 @@ GameObject:
   - component: {fileID: 1786369533952214181}
   - component: {fileID: 2230017526635790869}
   m_Layer: 0
-  m_Name: DashFPCamera
+  m_Name: RunFirstPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,9 +549,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8485327657933185800}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08854103, y: 5.7214146, z: 0.9026756}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 1.4551917e-11, y: -0, z: -5.820767e-11, w: 1}
+  m_LocalPosition: {x: -0.08854103, y: 5.14, z: 3.96}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6439744671742801340}
@@ -586,7 +579,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 30
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -664,6 +657,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf4c08cc0e083e40b865828f217a46f, type: 3}
+--- !u!114 &772894661868327986 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1247034934789223818, guid: fcf4c08cc0e083e40b865828f217a46f, type: 3}
+  m_PrefabInstance: {fileID: 2015224713385091512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa7fd0095941874eb80f0cc4f8dbbb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &772894661868327987 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1247034934789223819, guid: fcf4c08cc0e083e40b865828f217a46f, type: 3}
