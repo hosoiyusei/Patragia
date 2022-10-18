@@ -9,10 +9,11 @@ public class PlayerCameraManager : MonoBehaviour
 
 	enum CameraType
 	{
-        ThirdPersonCamera ,     //三人称視点
+        ThirdPersonCamera ,    //三人称視点
         WalkFirstPersonCamera, //一人称視点で歩く
-        RunFirstPersonCamera, //一人称視点で走る
+        RunFirstPersonCamera,  //一人称視点で走る
         ProneFirstPersonCamera,//一人称視点で匍匐
+        FromTopCamera,         //上からのカメラ
     }
 
      /// <summary>
@@ -45,22 +46,20 @@ public class PlayerCameraManager : MonoBehaviour
     //////////////////////////////////////////////////////// 
     private void SwitchCameraActive(CameraType cameraType)
     {
-
         //引数のカメラタイプ以外を非表示にする
         foreach (var item in _CameraArray)
 		{
             if (item.name == cameraType.ToString())
-                item.gameObject.SetActive(true);
+                item.m_Priority = 10;
             else
-                item.gameObject.SetActive(false);
-
+                item.m_Priority = 0;
         }
     }
 
     void Start()
     {
         //バーチャルカメラを取得する
-        _CameraArray = Transform.FindObjectsOfType<CinemachineVirtualCamera>();
+        _CameraArray = FindObjectsOfType<CinemachineVirtualCamera>();       
     }
 
     // Update is called once per frame
@@ -70,6 +69,11 @@ public class PlayerCameraManager : MonoBehaviour
         {
             _IsFP = !_IsFP;//フラグを反対に
         }
+
+        if(Input.anyKeyDown)
+        {
+            Debug.Log("押した");
+
             //一人称視点の時
             if (_IsFP)
             {
@@ -78,7 +82,7 @@ public class PlayerCameraManager : MonoBehaviour
                 {
                     Debug.Log(_AnimScript.GetIsProne());
                     SwitchCameraActive(CameraType.ProneFirstPersonCamera);//カメラを切り替える
-				}
+			    }
                 //走る
                 else if (_AnimScript.GetIsRun())
                     SwitchCameraActive(CameraType.RunFirstPersonCamera);//カメラを切り替える
@@ -91,5 +95,5 @@ public class PlayerCameraManager : MonoBehaviour
             else
                 SwitchCameraActive(CameraType.ThirdPersonCamera);//カメラを切り替える
         }
-    
+    }
 }
